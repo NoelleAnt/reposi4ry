@@ -9,13 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('comments', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users
+        $table->foreignId('post_id')->constrained()->onDelete('cascade'); // Foreign key to posts
+        $table->text('content'); // Field for the comment content
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

@@ -9,13 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('media', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('media', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('post_id')->constrained()->onDelete('cascade'); // Foreign key to posts
+        $table->string('file_path'); // Assuming a field for the media file path
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
