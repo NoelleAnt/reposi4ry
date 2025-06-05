@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -47,24 +49,18 @@ class User extends Authenticatable
     /**
      * Get the user role associated with the user.
      */
-    public function userRole()
+    public function Roles(): BelongsToMany
     {
-        return $this->belongsTo(UserRole::class);
+        return $this->belongsToMany(Role::class, 'user_role');
     }
 
-    /**
-     * Get the comments made by the user.
-     */
-    public function comments()
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
+
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * Get the posts created by the user.
-     */
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
     }
 }

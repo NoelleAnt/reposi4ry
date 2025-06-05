@@ -3,26 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
-    public function user()
+    public function posts(): BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Tag::class, 'post_category');
     }
 
-    public function category()
-    {
-        return $this->belongsTo(PostCategory::class);
-    }
-
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tag');
     }
 
-    public function comments()
+    public function user(): BelongsTo
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function media(): HasMany
+    {
+        return $this->hasMany(Media::class);
     }
 }
