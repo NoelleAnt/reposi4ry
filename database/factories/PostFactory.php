@@ -2,20 +2,29 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
-use App\Models\PostCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ */
 class PostFactory extends Factory
 {
-    protected $model = Post::class;
-
-    public function definition()
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
+    $status = fake()->randomElement(['D', 'P', 'I']);
+    $title = fake()->title();
         return [
-            'title' => $this->faker->sentence(),
-            'content' => $this->faker->paragraph(),
-            'category_id' => PostCategory::factory(),
+        'title' => $title,
+        'slug' => str($title)->slug(),
+        'content' => fake()->paragraph(),
+        'status' => $status,
+        'publication_date' => $status === 'P' ? now() : null,
+        'featured_image_url' => fake()->imageUrl(640,480, 'animals', true),
         ];
     }
 }
