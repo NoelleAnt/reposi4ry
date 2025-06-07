@@ -3,17 +3,19 @@
 namespace Database\Factories;
 
 use App\Models\Comment;
+use App\Models\User;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CommentFactory extends Factory
 {
     protected $model = Comment::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
-            'user_id' => \App\Models\User::factory(), // Assuming you have a User factory
-            'post_id' => \App\Models\Post::factory(), // Assuming you have a Post factory
+            'user_id' => User::factory(),
+            'post_id' => Post::factory(),
             'content' => $this->faker->paragraph(),
         ];
     }
