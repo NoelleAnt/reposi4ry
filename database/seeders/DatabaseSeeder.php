@@ -17,16 +17,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Call the other seeders
         $this->call([
-            RoleSeeder::class,          // Add RoleSeeder
-            UserRoleSeeder::class,     // Add UserRoleSeeder
-            UserSeeder::class,         // Add UserSeeder
-            PostCategorySeeder::class,  // Add PostCategorySeeder
-            PostSeeder::class,          // Add PostSeeder
-            MediaSeeder::class,         // Add MediaSeeder
-            CommentSeeder::class,       // Add CommentSeeder
-            PostTagSeeder::class,       // Add PostTagSeeder
+            CategorySeeder::class,
+            CommentSeeder::class,
+            MediaSeeder::class,
+            PostSeeder::class,
+            RoleSeeder::class,
+            TagSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
